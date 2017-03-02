@@ -1,0 +1,18 @@
+{
+  "name": "marked-summer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "coffee -c -M *.coffee.md"
+  },
+  "author": "Stéphane Alnet <stephane@shimaore.net> (https://stephane.shimaore.net/)",
+  "license": "Unlicense",
+  "devDependencies": {
+    "coffee-script": "^1.12.4"
+  },
+  "dependencies": {
+    "debug": "^2.6.1",
+    "seem": "^2.0.0"
+  }
+}
