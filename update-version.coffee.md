@@ -10,7 +10,7 @@
         {version,_rev} = yield db
           .get ddoc._id
           .catch (error) ->
-            if error.status is 409
+            if error.status in [404,409]
               {}
             else
               Promise.reject error
