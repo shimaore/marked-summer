@@ -3,7 +3,8 @@
   "version": "1.1.0",
   "description": "Utilities for CCNQ4",
   "scripts": {
-    "prepublish": "coffee -c -M *.coffee.md"
+    "prepublishOnly": "npm install --only=dev && npm run build",
+    "build": "coffee -c *.coffee.md"
   },
   "author": "Stéphane Alnet <stephane@shimaore.net> (https://stephane.shimaore.net/)",
   "license": "Unlicense",
