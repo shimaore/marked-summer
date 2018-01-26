@@ -2,10 +2,18 @@
     debug = (require 'debug') 'marked-summer:update-version'
     sleep = require './sleep'
 
+    semver = require 'semver'
+
+Return true if the current version ≥ our version ?
+
+    ok = (current_version,our_version) ->
+      return false unless current_version?
+      semver.gte current_version, our_version
+
     module.exports = update_version = seem (db,ddoc) ->
       version = null
       timer = 43+Math.random()*319
-      until version is ddoc.version
+      until ok version, ddoc.version
 
         {version,_rev} = yield db
           .get ddoc._id
@@ -15,7 +23,7 @@
             else
               Promise.reject error
 
-        unless version is ddoc.version
+        unless ok version, ddoc.version
           debug 'updating design document', ddoc._id, ddoc.version
           if _rev?
             ddoc._rev = _rev
@@ -29,3 +37,5 @@ Introduce a delay in case the user is trying this operation multiple times concu
           yield db
             .put ddoc
             .catch -> null
+
+      return

@@ -1,7 +1,7 @@
 {
   "name": "marked-summer",
   "version": "1.0.3",
-  "description": "",
+  "description": "Utilities for CCNQ4",
   "scripts": {
     "prepublish": "coffee -c -M *.coffee.md"
   },
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "debug": "^2.6.1",
-    "seem": "^2.0.0"
+    "seem": "^2.0.0",
+    "semver": "^5.5.0"
   }
 }
