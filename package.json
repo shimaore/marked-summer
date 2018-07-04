@@ -9,11 +9,10 @@
   "author": "Stéphane Alnet <stephane@shimaore.net> (https://stephane.shimaore.net/)",
   "license": "Unlicense",
   "devDependencies": {
-    "coffee-script": "^1.12.4"
+    "coffeescript": "^2.3.1"
   },
   "dependencies": {
-    "debug": "^2.6.1",
-    "seem": "^2.0.0",
+    "debug": "^3.1.0",
     "semver": "^5.5.0"
   }
 }

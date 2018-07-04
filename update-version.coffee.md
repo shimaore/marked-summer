@@ -1,4 +1,3 @@
-    seem = require 'seem'
     debug = (require 'debug') 'marked-summer:update-version'
     sleep = require './sleep'
 
@@ -10,12 +9,12 @@ Return true if the current version ≥ our version ?
       return false unless current_version?
       semver.gte current_version, our_version
 
-    module.exports = update_version = seem (db,ddoc) ->
+    module.exports = update_version = (db,ddoc) ->
       version = null
       timer = 43+Math.random()*319
       until ok version, ddoc.version
 
-        {version,_rev} = yield db
+        {version,_rev} = await db
           .get ddoc._id
           .catch (error) ->
             if error.status in [404,409]
@@ -30,11 +29,11 @@ Return true if the current version ≥ our version ?
 
 Introduce a delay in case the user is trying this operation multiple times concurrently.
 
-          yield sleep timer
+          await sleep timer
 
           timer *= 2 + Math.random()
 
-          yield db
+          await db
             .put ddoc
             .catch -> null
 
