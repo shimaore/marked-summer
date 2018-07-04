@@ -9,10 +9,15 @@ Return true if the current version ≥ our version ?
       return false unless current_version?
       semver.gte current_version, our_version
 
+    maximum_attempts = Infinity
+    if process.env.UPDATE_VERSION_MAXIMUM_ATTEMPTS?
+      maximum_attempts = parseInt process.env.UPDATE_VERSION_MAXIMUM_ATTEMPTS, 10
+
     module.exports = update_version = (db,ddoc) ->
       version = null
       timer = 43+Math.random()*319
-      until ok version, ddoc.version
+      attempts = 0
+      until ok version, ddoc.version or attempts > maximum_attempts
 
         {version,_rev} = await db
           .get ddoc._id
@@ -20,6 +25,7 @@ Return true if the current version ≥ our version ?
             if error.status in [404,409]
               {}
             else
+              debug 'retrieving design document failed', ddoc._id, error
               Promise.reject error
 
         unless ok version, ddoc.version
@@ -36,5 +42,7 @@ Introduce a delay in case the user is trying this operation multiple times concu
           await db
             .put ddoc
             .catch -> null
+
+        attempts++
 
       return
