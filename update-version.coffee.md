@@ -17,7 +17,7 @@ Return true if the current version ≥ our version ?
       version = null
       timer = 43+Math.random()*319
       attempts = 0
-      until ok version, ddoc.version or attempts > maximum_attempts
+      until attempts > maximum_attempts or ok version, ddoc.version
 
         {version,_rev} = await db
           .get ddoc._id
