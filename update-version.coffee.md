@@ -7,7 +7,7 @@ Return true if the current version ≥ our version ?
 
     ok = (current_version,our_version) ->
       return false unless current_version?
-      semver.gte (s.coerce current_version), (s.coerce our_version)
+      semver.gte (semver.coerce current_version), (semver.coerce our_version)
 
     maximum_attempts = Infinity
     if process.env.UPDATE_VERSION_MAXIMUM_ATTEMPTS?
